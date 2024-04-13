@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////////////////
-
+//yongjae is bad boy
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section A - Linked List Questions
 Purpose: Implementing the required functions for Question 1 */
@@ -91,6 +91,27 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	ListNode *cur = ll->head;
+    
+    int index = 0;
+    
+    // 받은 item이 탐색하는 노드의 item보다 작을 때 까지,
+    while (cur != NULL && item > cur->item){
+        
+        cur = cur->next;
+        index += 1;
+    }
+    
+    // 중복일 경우 -1 리턴
+    if (cur != NULL && cur->item == item)
+        return -1;
+
+	// 오름차순으로 정수 삽입
+	if (insertNode(ll, index, item) == -1)
+	    return -1; //실패시 -1 반환
+	else
+	    return index;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

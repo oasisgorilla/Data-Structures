@@ -104,6 +104,27 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	ListNode *cur1 = ll1->head;
+	ListNode *cur2 = ll2->head;
+	int index1 = 0; //cur2 배치 인덱스
+
+	while (cur1 != NULL && cur2 != NULL){ // NULL이 아닌 것만으로 조건이 충분한지? 배열 범위를 벗어나지 않는지?
+		ListNode *temp1 = cur1->next;
+		ListNode *temp2 = cur2->next;
+		
+		//cur1 다음에 cur2 연결
+		cur1->next = cur2;
+		//cur2의 next는 이전에 저장해둔 cur1->next로
+		cur2->next = temp1;
+		
+		//cur1은 원래 배열1의 두 번째 노드로
+		cur1 = temp1;
+		//cur2 커서 이동
+		cur2 = temp2;
+		
+		//temp2를 ll2의 유일한 노드로
+		ll2->head = temp2;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
