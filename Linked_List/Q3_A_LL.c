@@ -87,6 +87,34 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	ListNode *cur;
+	
+	// printf("Start moving odd items...\n");
+	
+	cur = ll->head; // 첫 노드 가리키는 커서
+    int idx = 0; // while문에서 사용될 index 변수
+	int cnt = 0; // while문에서 사용될 카운터 변수
+
+	ListNode *last = findNode(ll, ll->size - 1); // 맨 끝 노드 포인터
+
+	while (cur != NULL && cnt < ll->size){ // 노드 개수만큼만 반복
+
+		// printf("Processing node %d with value %d\n", idx, cur->item);
+		ListNode *temp = cur->next; // 다음 노드 값 임시 저장
+		// cur은 if문 안에서 삭제될 수 있음
+		
+		if (cur->item % 2 == 1){ // 노드 아이템이 홀수인 경우
+			insertNode(ll, ll->size, cur->item); // 맨 뒤 + 1 칸에 노드 삽입
+			removeNode(ll, idx); // 현재 노드 삭제
+			idx--; // 인덱스 감소
+			// printf("Odd item %d moved to the back.\n", cur->item);
+		}// if
+		
+		cur = temp; // 커서 이동
+		cnt++; // 카운터 증가
+		idx++; //인덱스 증가
+	} // while
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
