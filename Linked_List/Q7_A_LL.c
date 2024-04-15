@@ -88,7 +88,26 @@ int main()
 void RecursiveReverse(ListNode **ptrHead)
 {
 	/* add your code here */
+	ListNode *first, *rest;
+	
+	first = *ptrHead; // 가장 처음 받는 노드
+	rest = first->next; // 현재 노드의 다음 노드
+// 	printf("first : %d \n", first);
+// 	printf("rest : %d \n", rest);
+	
+	if(rest == NULL) { //탈출조건 : 다음 노드가 없으면 탈출
+	    return;
+	}
+    
+    //first->next = NULL;
+    // printf("------------\n");
+    RecursiveReverse(&rest); // 노드만 이동
+    first->next->next = first; // 다음노드와 현재노드 자리 변경
+    first->next = NULL;
+    *ptrHead = rest;
+    
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 

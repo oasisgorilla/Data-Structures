@@ -3,7 +3,7 @@
 /* CE1007/CZ1007 Data Structures
 Lab Test: Section A - Linked List Questions
 Purpose: Implementing the required functions for Question 5 */
-
+//yong jae is bad boy
 //////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
@@ -103,6 +103,32 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	int backStartIdx = 0; // 두 번째 리스트 시작idx
+	LinkedList *temp = ll; // 원본 리스트 임시 저장
+	printf("함수 진입\n");
+	
+	if (ll->size % 2 == 1) {
+	    backStartIdx = (ll->size / 2) + 1; // 홀수일 때는 + 1
+	}else{
+	    backStartIdx = ll->size / 2;
+	} // else
+	printf("backStartIdx = %d \n", backStartIdx);
+	int loopLimit = ll->size - backStartIdx;
+	
+    ListNode *cur; // 현재 노드 커서
+    
+    for (int i = 0; i < loopLimit; i++) { // backStartIdx부터 끝까지
+        printf("%d 중 %d 번 반복중\n", loopLimit, i);
+        cur = findNode(ll, backStartIdx); // ll의 backStartIdx로 접근
+        printf("item = %d \n", cur->item);
+        if (cur != NULL) {    
+            insertNode(resultBackList, i, cur->item); //  bacllist에 0번 인덱스부터 삽입
+            removeNode(ll, backStartIdx); // 삭제해야 할 노드는 항상 ll의 backStartIdx 노드이다.
+        }
+            
+        } // for
+	printf("for문 탈출\n");
+	resultFrontList->head = ll->head; // 뒤쪽 노드를 삭제한 ll을 frontlist로 만들어준다.
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

@@ -89,6 +89,35 @@ int main()
 int moveMaxToFront(ListNode **ptrHead)
 {
     /* add your code here */
+	ListNode *front, *temp, *nextNode;
+    front = *ptrHead; // 나중에 찾은 max node의 next를 연결시킬 포인터 변수
+    temp = *ptrHead; // temp는 ptrHead의 주소가 담긴 포인터 변수
+    
+    nextNode = temp->next; // next는 ptrHead의 다음 주소가 담긴 포인터 변수
+    
+    int max_item = temp->item; // 리스트를 순회하면서 최댓값을 저장할 변수
+    
+    while (temp != NULL){ // 존재하는 모든 노드에 대해서
+        if (temp->item > max_item){
+            max_item = temp->item; // 노드를 순회하면서 최댓값 구하기
+        }
+        temp = temp->next;
+    }// while
+    
+    printf("max = %d \n", max_item);
+    
+    temp = *ptrHead; // 다시 초기화
+    
+    while (temp != NULL){
+        if (max_item == nextNode->item){ //최댓값을 가진 nextNode 노드에 대해
+            temp->next = nextNode->next; // 현재 temp 노드의 다음에 nextNode의 다음 노드가 연결됨
+            nextNode->next = front; // nextNode 노드의 뒤에 원래 맨 앞 노드가 연결됨
+            *ptrHead = nextNode; // &(ll.head) 를 nextNode로 바꿈
+            break;
+        }
+        temp = temp->next; // 다음노드 탐색
+        nextNode = temp->next;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
