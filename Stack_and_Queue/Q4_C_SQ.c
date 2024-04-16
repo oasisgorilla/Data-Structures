@@ -113,6 +113,28 @@ int main()
 void reverse(Queue *q)
 {
 /* add your code here */
+    // 스택 초기화
+    Stack s;
+    s.ll.head = NULL;
+    s.ll.size = 0;
+    s.ll.tail = NULL;
+    
+    while (isEmptyQueue(q) != 1) { // 큐에 아무것도 남지 않을 때까지
+        int temp = dequeue(q); // 큐에서 빼와서
+        // printf("dequeue : %d \n", temp);
+        push(&(s), temp); // 스택에 넣는다.
+        // printf("push : %d \n", temp);
+        printf("stack size : %d \n", s.ll.size);
+    }
+
+    while (isEmptyStack(&(s)) != 1) {
+        // printf("스택 접근 \n");
+        int temp = pop(&(s)); // 스택에서 빼와서
+        // printf("pop : %d \n", temp);
+        enqueue(q, temp);
+        // printf("enqueue : %d \n", temp);
+    }
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
