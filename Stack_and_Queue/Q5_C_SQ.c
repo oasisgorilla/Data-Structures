@@ -110,6 +110,14 @@ int main()
 void recursiveReverse(Queue *q)
 {
 /* add your code here */
+    int temp;
+    if(isEmptyQueue(q) == 1){ // 큐가 비면 재귀 탈출
+        return;
+    }
+    temp = dequeue(q); // 큐에서 dequeue한다.
+    recursiveReverse(q); // 재귀호출한다.(큐의 끝까지 이동)
+    enqueue(q, temp); // 큐의 끝에서부터 다시 큐에 넣으면서 올라온다.
+    
 }
 
 //////////////////////////////////////////////////////////////////
