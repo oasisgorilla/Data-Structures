@@ -117,6 +117,15 @@ int main()
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
 	/* add your code here */
+	ListNode *cur_n;
+	
+	cur_n = ll->head;
+	
+	while (cur_n != NULL){
+	    enqueue(q, cur_n->item); // 큐에 삽입
+	
+	    cur_n = cur_n->next; // 커서이동
+	}
 }
 
 void removeOddValues(Queue *q)

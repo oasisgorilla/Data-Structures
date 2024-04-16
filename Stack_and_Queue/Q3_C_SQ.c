@@ -104,6 +104,27 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+  if (s->ll.size == 0) {
+       printf("stack is empty");
+   }
+   if (s->ll.size % 2 == 1) {
+       return 0;
+   }else{
+       for(int i = 0; i <= s->ll.size; i+=2){
+           int a = pop(s);
+           int b = pop(s);
+           printf("%d, %d 확인 \n", a, b);
+           if (a - b == 1 || b - a == 1) {
+               printf("%d, %d 비교 \n", a, b);
+           }else{
+               printf("%d, %d 는 비연속적\n", a, b);
+               return 0;
+           }
+       }
+       return 1;
+   }
+	
+  
 }
 
 //////////////////////////////////////////////////////////////////////////////////
