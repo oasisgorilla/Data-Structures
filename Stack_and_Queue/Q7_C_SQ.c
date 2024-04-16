@@ -84,7 +84,7 @@ int main()
 			scanf("%s", str);
 			break;
         case 2:
-            if(balanced(str))
+            if(balanced(str) == 1)
                 printf("not balanced!\n");
             else
                 printf("balanced!\n");
@@ -105,6 +105,63 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+    // 스택 초기화
+    Stack s;
+    s.ll.head = NULL;
+    s.ll.size = 0;
+    int idx = 0;
+    
+    // printf("함수 호출\n");
+    while (expression[idx] != '\0') { // 문자열의 전체를 스택에 저장
+        if (expression[idx] == '[') {
+            push(&s, 1); // [ = 1
+        }else if (expression[idx] == '{') {
+            push(&s, 2); // { = 2
+        }else if (expression[idx] == '(') {
+            push(&s, 3); // ( = 3
+        }else if (expression[idx] == ']') {
+            push(&s, -1);
+        }else if (expression[idx] == '}') {
+            push(&s, -2);
+        }else if (expression[idx] == ')') {
+            push(&s, -3);
+        }
+        
+        // printf("%c 저장\n", expression[idx]);
+        idx ++;
+        
+    } // while
+    int endIdx = idx;
+    idx = 0; // 문자열의 처음부터 스택의 top과 비교
+    
+    while(isEmptyStack(&s) != 1) { //저장한 스택과 비교
+        int strToInt;
+        
+        if (expression[idx] == ']') { // 문자를 숫자와 매칭
+            strToInt = -1;
+        }else if (expression[idx] == '}') {
+            strToInt = -2;
+        }else if (expression[idx] == ')') {
+            strToInt = -3;
+        }else if (expression[idx] == '[') {
+            strToInt = 1;
+        }else if (expression[idx] == '{') {
+            strToInt = 2;
+        }else if (expression[idx] == '(') {
+            strToInt = 3;
+        }
+        // printf("%c 와 %d 비교\n", expression[idx], peek(&s));
+        if (strToInt + peek(&s) != 0){ // 현재 탐색중인 문자가 스택에 저장된 순서와 다를 경우
+            removeAllItemsFromStack(&s); // 스택 비우기
+            return 0;
+        }else{
+            pop(&s); // 같을 경우 pop하고
+            idx ++; // 다음노드 탐색
+        }
+        
+    } // while
+    
+    return 1;
 }
 
 ////////////////////////////////////////////////////////////
