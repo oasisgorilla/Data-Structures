@@ -117,6 +117,29 @@ int identical(BTNode *tree1, BTNode *tree2)
 
 {
    /* add your code here */
+   // 1 = identical, 0 = different
+    // printf("시발점\n");
+    if (tree1 == NULL && tree2 == NULL) { // 둘 다 빈 노드인 경우
+        printf("빈 노드 비교\n");
+        return 1; // 두 노드는 항상 같은 노드
+    }
+    
+    if (tree1 == NULL || tree2 == NULL) { // 둘 중 하나만 빈 노드인 경우
+        // printf("둘 중 하나만 빈 노드\n");
+        return 0; // 두 노드는 항상 다른 노드
+    }
+    
+    if (tree1->item != tree2->item) { // 둘 다 빈 노드가 아닌 경우 item비교
+        // printf("{%d}와 {%d} 비교\n", tree1->item, tree2->item);
+        return 0; // 다르면 0 리턴
+    }
+    
+    int rCheck = identical(tree1->right, tree2->right);
+    int lCheck = identical(tree1->left, tree2->left);
+    // printf("%d 와 %d\n", rCheck, lCheck);
+    // printf("-----------------\n");
+    return rCheck * lCheck;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -236,3 +259,5 @@ void removeAll(BTNode **node){
         *node = NULL;
     }
 }
+
+
