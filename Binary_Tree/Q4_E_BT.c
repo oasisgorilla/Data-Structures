@@ -104,6 +104,19 @@ int sumOfOddNodes(BTNode *node)
 
 {
     /* add your code here */
+    if (node == NULL) { // 탈출조건
+        return 0;
+    } else if (node->item % 2 == 1) { // 해당 노드가 홀수인지 체크
+        int rCheck = sumOfOddNodes(node->right); // 자식들 확인
+        int lCheck = sumOfOddNodes(node->left);
+        
+        return rCheck + lCheck + node->item; //자식들 누적합 + 현재 노드 item return
+    } else { // 해당 노드가 홀수가 아닌 경우
+        int rCheck = sumOfOddNodes(node->right); // 자식들 확인
+        int lCheck = sumOfOddNodes(node->left);
+        
+        return rCheck + lCheck; // 자식들 누적합 return
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

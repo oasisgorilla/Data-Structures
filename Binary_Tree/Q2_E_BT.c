@@ -98,8 +98,22 @@ int maxHeight(BTNode *node)
 
 {
     /* add your code here */
+    // leaf 부터 노드 확인, 두 노드를 비교해서, 더 긴 노드의 경로 + 1 return
+    
+    if (node == NULL) { // 탈출 조건, 비어 있는 노드일 경우
+        return -1; // 위에서 더해질 것이기 때문에 -1
+    }else{ // 빈 노드가 아닐 경우
+        int rightLen = maxHeight(node->right);  
+        int leftLen = maxHeight(node->left);
+        if (rightLen > leftLen) { // 왼쪽과 오른쪽 자식의 결과를 비교
+            return rightLen + 1; // 더 긴 경로에 + 1하여 return
+        }else{
+            
+            return leftLen + 1;
+        }
+    }
+    
 }
-
 ///////////////////////////////////////////////////////////////////////////////////
 
 BTNode *createBTNode(int item){

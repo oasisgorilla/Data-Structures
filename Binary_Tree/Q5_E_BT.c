@@ -106,6 +106,22 @@ int main()
 void mirrorTree(BTNode *node)
 {
 	/* add your code here */
+	if (node == NULL) {
+	    return;
+	} else {
+	    BTNode *temp = NULL;
+	   // printf("%d 노드 진입\n", node->item);
+	    
+	   // printf("%d 임시 저장 \n", node->left->item);
+	    temp = node->left;
+	   // printf("left %d = %d \n", node->left->item, node->right->item);
+	    node->left = node->right;
+	   // printf("rigth %d = %d \n", node->right->item, temp->item);
+	    node->right = temp;
+    
+	    mirrorTree(node->left);
+	    mirrorTree(node->right);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

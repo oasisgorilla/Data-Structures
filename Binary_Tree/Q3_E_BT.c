@@ -102,6 +102,25 @@ int countOneChildNodes(BTNode *node)
 
 {
     /* add your code here */
+    if (node == NULL) { // 빈 노드일 경우 탈출
+        // printf(": 빈노드\n");
+        return 0;
+    }else if (node->left == NULL && node->right != NULL) { // 오른쪽 자식만 있는 경우
+        // printf("%d : 오른쪽자식만 있음\n", node->item);
+        int rCheck = countOneChildNodes(node->right);
+        // int lCheck = countOneChildNodes(node->left);
+        return rCheck + 1;
+    }else if(node->left != NULL && node->right == NULL){ // 왼쪽 자식만 있는 경우
+        // printf("%d : 왼쪽자식만 있음\n", node->item);
+        // int rCheck = countOneChildNodes(node->right);
+        int lCheck = countOneChildNodes(node->left);
+        return lCheck + 1;
+    }else{ // 자식이 아예 없거나 둘 다 있는 경우
+        // printf("%d : 자식이 없거나 둘 다 있음\n", node->item);
+        int rCheck = countOneChildNodes(node->right);
+        int lCheck = countOneChildNodes(node->left);
+        return rCheck + lCheck;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
