@@ -106,6 +106,18 @@ int main()
 void printSmallerValues(BTNode *node, int m)
 {
 	/* add your code here */
+    if (node == NULL) {
+        return;
+    } else {
+        if (node->item < m) { // 주어진 item보다 작으면
+            printf("%d ", node->item); // print
+            printSmallerValues(node->left, m); // 전위순회이므로 왼쪽 먼저 탐색
+            printSmallerValues(node->right, m);
+        } else {
+            printSmallerValues(node->left, m); // 주어진 item보다 큰 경우 print 하지 않고 전위순회
+            printSmallerValues(node->right, m);
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////

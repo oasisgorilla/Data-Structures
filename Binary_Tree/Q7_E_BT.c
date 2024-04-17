@@ -103,6 +103,23 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    
+    if (node == NULL) {
+        return 2147483647; // 빈 노드일 경우 최대 int return
+    } else {
+        int minValue = node->item; // return할 최솟값 초기화
+
+        int lCheck = smallestValue(node->left); // 전위순회
+        if (minValue > lCheck) { // 왼쪽 자식값과 비교
+            minValue = lCheck; // 최솟값 갱신
+        }
+        int rCheck = smallestValue(node->right);
+        if (minValue > rCheck) { // 오른쪽 자식값과 비교
+            minValue = rCheck; // 최솟값 갱신
+        }
+        return minValue; // 현재 노드와 자식노드들과 비교한 최솟값 return
+    }
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////
